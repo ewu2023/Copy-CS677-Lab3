@@ -1,0 +1,20 @@
+Passed test_lookup_valid_stock
+Message received from Catalog: {'name': 'GameStart', 'price': 15.99, 'quantity': 100}
+
+Passed test_lookup_invalid_stock
+Message received from Catalog: {'error': {'code': 404, 'message': 'stock not found'}}
+
+Passed test_increment_valid_stock
+Lookup before increment: {'name': 'GameStart', 'price': 15.99, 'quantity': 100}
+Lookup after increment: {'name': 'GameStart', 'price': 15.99, 'quantity': 110}
+
+Passed test_decrement_valid_stock
+Lookup before decrement: {'name': 'GameStart', 'price': 15.99, 'quantity': 110}
+Lookup after decrement: {'name': 'GameStart', 'price': 15.99, 'quantity': 100}
+
+Passed test_update_invalid
+Message received when attempting to increment: {'error': {'code': 500, 'message': 'failed to update stock'}}
+Message received when attempting to decrement: {'error': {'code': 500, 'message': 'failed to update stock'}}
+
+--------------------
+All passed!

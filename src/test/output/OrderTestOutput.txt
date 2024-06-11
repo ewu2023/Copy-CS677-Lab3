@@ -1,0 +1,20 @@
+Passed test_valid_buy
+Received Message from Order Service: {'transaction-number': 14}
+
+Passed test_valid_sell
+Received Message from Order Service: {'transaction-number': 15}
+
+Passed test_invalid_buy
+Received Message from Order Service: {'error': {'code': 404, 'message': 'stock not found'}}
+
+Passed test_invalid_sell
+Received Message from Order Service: {'error': {'code': 404, 'message': 'stock not found'}}
+
+Passed test_buy_over_limit
+Received Message from Order Service: {'error': {'code': 500, 'message': 'could not trade stock'}}
+
+Passed test_successive_transaction_ids
+Received Buy Message from Order Service: {'transaction-number': 16}
+Received Sell Message from Order Service: {'transaction-number': 17}
+--------------------
+All passed!

@@ -1,0 +1,64 @@
+Passed test_valid_lookup
+Message received: {'data': {'name': 'GameStart', 'price': 15.99, 'quantity': 100}}
+
+Passed test_invalid_lookup
+Message received: {'error': {'code': 404, 'message': 'stock not found'}}
+
+Passed test_frontend_buy
+Message before buying shares: {'data': {'name': 'FishCo', 'price': 19.99, 'quantity': 120}}
+Message after buying shares: {'data': {'name': 'FishCo', 'price': 19.99, 'quantity': 110}} 
+
+Passed test_frontend_sell
+Message before selling shares: {'data': {'name': 'FishCo', 'price': 19.99, 'quantity': 110}}
+Message after selling shares: {'data': {'name': 'FishCo', 'price': 19.99, 'quantity': 120}}
+
+Passed test_trade_invalid_stock
+Message received from buy request: {'error': {'code': 404, 'message': 'requested stock could not be traded because it could not be found'}}
+Message received from sell request: {'error': {'code': 404, 'message': 'requested stock could not be traded because it could not be found'}}
+
+BEGIN: test_lru_cache
+URL: http://localhost:5000/stocks/GameStart
+Response: {'data': {'name': 'GameStart', 'price': 15.99, 'quantity': 100}}
+
+URL: http://localhost:5000/stocks/FishCo
+Response: {'data': {'name': 'FishCo', 'price': 19.99, 'quantity': 120}}
+
+URL: http://localhost:5000/stocks/CrassusRealty
+Response: {'data': {'name': 'CrassusRealty', 'price': 30.99, 'quantity': 100}}
+
+Cache has expected length of 3
+Cache has expected structure after retrieving old entry
+Correct stock was evicted after a new stock was retrieved from catalog
+PASSED: TEST_LRU_CACHE
+
+BEGIN: test_invalidate
+URL: http://localhost:5000/stocks/FishCo
+Response: {'data': {'name': 'FishCo', 'price': 19.99, 'quantity': 120}}
+
+URL: http://localhost:5000/stocks/CrassusRealty
+Response: {'data': {'name': 'CrassusRealty', 'price': 30.99, 'quantity': 100}}
+
+URL: http://localhost:5000/stocks/MenhirCo
+Response: {'data': {'name': 'MenhirCo', 'price': 9.99, 'quantity': 100}}
+
+Sell Response: {'data': {'transaction-number': 10}}
+Buy Response: {'data': {'transaction-number': 11}}
+
+Stocks successfully invalidated: ('CrassusRealty', 'MenhirCo')
+State of cache: ['FishCo']
+
+PASSED: test_invalidate
+BEGIN: test_consistency
+{'data': {'transaction-number': 12}}
+
+PASSED: test_consistency
+All databases are consistent among replicas
+
+BEGIN: test_fault_tolerance
+Leader has been assigned correctly by front end
+
+Order server 3 successfully shutdown
+Successfully received message from order service: {'data': {'transaction-number': 13}}
+PASSED: test_fault_tolerance
+--------------------
+All passed!
